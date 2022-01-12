@@ -3,6 +3,9 @@
 use Credpal\CPInvest\Http\Controllers\CPInvestController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('tenures', 'Credpal\CPInvest\Http\Controllers\CPInvestController@getTenures')
+    ->middleware('auth:api');
+
 Route::post('create', 'Credpal\CPInvest\Http\Controllers\CPInvestController@create')
     ->middleware('auth:api');
 

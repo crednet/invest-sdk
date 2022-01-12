@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CPInvestController extends Controller
 {
+    public function getTenures()
+    {
+        return $this->successResponse(CpInvest::getTenures());
+    }
+    
     public function create(CreateInvestmentRequest $request)
     {
         $data = array_merge($request->validated(), [

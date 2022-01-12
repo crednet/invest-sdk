@@ -16,7 +16,7 @@ class InvestService
             ])->$method(config('cpinvest.base_url') . $url, $data);
 
             if (!$response->successful()) {
-                throw new CPInvestException($response->json()["message"], $response->status(), $response->json()["errors"]);
+                throw new CPInvestException($response->json()["message"], $response->status());
             }
 
             return $response;
@@ -27,7 +27,8 @@ class InvestService
 
     public static function getInvestmentTenures()
     {
-        return self::makeRequest('tenures/list')->json();
+
+        return self::makeRequest('tenures/list', 'get')->json();
     }
 
     public static function createInvestment($data)
