@@ -1,0 +1,30 @@
+{
+    "name": "credpal/cp-invest",
+    "description": "Laravel SDK for Credpal Invest",
+    "type": "library",
+    "keywords": ["framework", "laravel", "invest", "credpal", "credpal invest"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Okhamafe Emmanuel",
+            "email": "osas006@yahoo.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Credpal\\CPInvest\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Credpal\\CPInvest\\Providers\\CPInvestServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
