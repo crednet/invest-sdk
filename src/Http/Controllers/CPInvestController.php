@@ -12,7 +12,7 @@ class CPInvestController extends Controller
     {
         return $this->successResponse(CpInvest::getTenures());
     }
-    
+
     public function create(CreateInvestmentRequest $request)
     {
         $data = array_merge($request->validated(), [
@@ -57,6 +57,16 @@ class CPInvestController extends Controller
         return $this->successResponse(CpInvest::liquidateInvestment([
             'user_id' => auth()->user()->id,
             'investment_id' => $investmentId
-        ]));
+        ]), "Investment Stopped");
+    }
+
+    public function withdrawFunds(string $investmentId)
+    {
+        return $this->successResponse(CpInvest::withdrawFunds([
+            'user_id' => auth()->user()->id,
+            'investment_id' => $investmentId,
+            'account_number' => auth()->user()->profile->account_no,
+            'bank_code' => auth()->user()->profile->bank_name
+        ]), "Withdrawal Request Sent");
     }
 }

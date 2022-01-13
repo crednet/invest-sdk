@@ -67,4 +67,13 @@ class InvestService
             "post",
         )->json()['data'];
     }
+
+    public static function withdrawFunds($data)
+    {
+        return self::makeRequest(
+            "investments/{$data['investment_id']}/user/{$data['user_id']}/withdraw",
+            "post",
+            $data
+        )->json()['data'];
+    }
 }

@@ -25,3 +25,6 @@ Route::get(
 
 Route::post('{investmentId}/liquidate', 'Credpal\CPInvest\Http\Controllers\CPInvestController@liquidateInvestment')
     ->middleware('auth:api');
+
+Route::post('{investmentId}/withdraw', 'Credpal\CPInvest\Http\Controllers\CPInvestController@withdrawFunds')
+    ->middleware('auth:api');

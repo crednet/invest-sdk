@@ -37,6 +37,11 @@ class CPInvest
         return InvestService::liquidateInvestment($data);
     }
 
+    public function withdrawFunds($data)
+    {
+        return InvestService::withdrawFunds($data);
+    }
+
     public function getTenures()
     {
         return InvestService::getInvestmentTenures();
