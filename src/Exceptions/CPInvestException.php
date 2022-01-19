@@ -8,11 +8,10 @@ use Illuminate\Http\JsonResponse;
 
 class CPInvestException extends Exception
 {
-    protected $errorData;
+    public static $errors;
 
-    public function __construct(string $message, int $code, array $errorData = [])
+    public function __construct(string $message, int $code)
     {
-        $this->errorData = $errorData;
         parent::__construct($message, $code);
     }
 
@@ -22,7 +21,21 @@ class CPInvestException extends Exception
             'success' => false,
             'message' => $this->getMessage()
         ];
+        
+        if ($this->getCode() == \Symfony\Component\HttpFoundation\Response::HTTP_EXPECTATION_FAILED) {
+            $errorResponse['errors'] = self::getValidationErrors();
+        }
 
         return response()->json($errorResponse, $this->getCode());
+    }
+
+    public static function setValidationErrors(array $errorData)
+    {
+        self::$errors = $errorData;
+    }
+
+    public static function getValidationErrors()
+    {
+        return self::$errors;
     }
 }

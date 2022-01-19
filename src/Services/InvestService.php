@@ -4,6 +4,7 @@ namespace Credpal\CPInvest\Services;
 
 use Credpal\CPInvest\Exceptions\CPInvestException;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpFoundation\Response;
 
 class InvestService
 {
@@ -12,10 +13,13 @@ class InvestService
         try {
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
-                'client_key' => config('cpinvest.client_key')
+                'client-key' => config('cpinvest.client_key')
             ])->$method(config('cpinvest.base_url') . $url, $data);
 
             if (!$response->successful()) {
+                if ($response->status() == Response::HTTP_EXPECTATION_FAILED && isset($response->json()['errors'])) {
+                    CPInvestException::setValidationErrors($response->json()['errors']);
+                }
                 throw new CPInvestException($response->json()["message"], $response->status());
             }
 
@@ -65,6 +69,7 @@ class InvestService
         return self::makeRequest(
             "investments/{$data['investment_id']}/user/{$data['user_id']}/liquidate",
             "post",
+            $data
         )->json()['data'];
     }
 
