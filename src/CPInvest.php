@@ -46,4 +46,9 @@ class CPInvest
     {
         return InvestService::getInvestmentTenures();
     }
+
+    public function requestOtp($data)
+    {
+        return InvestService::requestOtp($data);
+    }
 }

@@ -1,30 +1,24 @@
 <?php
 
-use Credpal\CPInvest\Http\Controllers\CPInvestController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('tenures', 'Credpal\CPInvest\Http\Controllers\CPInvestController@getTenures')
-    ->middleware('auth:api');
+Route::get('tenures', 'CPInvestController@getTenures');
 
-Route::post('create', 'Credpal\CPInvest\Http\Controllers\CPInvestController@create')
-    ->middleware('auth:api');
+Route::post('create', 'CPInvestController@create');
 
-Route::get('all', 'Credpal\CPInvest\Http\Controllers\CPInvestController@getAllUserInvestments')
-    ->middleware('auth:api');
+Route::get('all', 'CPInvestController@getAllUserInvestments');
 
-Route::get('active', 'Credpal\CPInvest\Http\Controllers\CPInvestController@getUserActiveInvestments')
-    ->middleware('auth:api');
+Route::get('active', 'CPInvestController@getUserActiveInvestments');
 
-Route::get('{investmentId}/details', 'Credpal\CPInvest\Http\Controllers\CPInvestController@getInvestmentDetails')
-    ->middleware('auth:api');
+Route::get('{investmentId}/details', 'CPInvestController@getInvestmentDetails');
 
 Route::get(
     '{investmentId}/transactions',
-    'Credpal\CPInvest\Http\Controllers\CPInvestController@getInvestmentTransactions'
-)->middleware('auth:api');
+    'CPInvestController@getInvestmentTransactions'
+);
 
-Route::post('{investmentId}/liquidate', 'Credpal\CPInvest\Http\Controllers\CPInvestController@liquidateInvestment')
-    ->middleware('auth:api');
+Route::post('otp', 'CPInvestController@requestOtp');
 
-Route::post('{investmentId}/withdraw', 'Credpal\CPInvest\Http\Controllers\CPInvestController@withdrawFunds')
-    ->middleware('auth:api');
+Route::post('{investmentId}/liquidate', 'CPInvestController@liquidateInvestment');
+
+Route::post('{investmentId}/withdraw', 'CPInvestController@withdrawFunds');

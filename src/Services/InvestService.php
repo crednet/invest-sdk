@@ -81,4 +81,13 @@ class InvestService
             $data
         )->json()['data'];
     }
+
+    public static function requestOtp($data)
+    {
+        return self::makeRequest(
+            "otp",
+            "post",
+            $data
+        )->json()['data'];
+    }
 }
