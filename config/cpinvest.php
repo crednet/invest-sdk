@@ -5,5 +5,6 @@ return [
     'client_key' => env('CPINVEST_CLIENT_KEY'),
     'credpal_cash_table' => env('CPINVEST_CASH_TABLE', 'cpcash_wallets'),
     'prefix' => 'api/invest',
-    'middleware' => ['api'],
+    'middleware' => ['api', 'auth:api'],
+    'namespace' => 'Credpal\CPInvest\Http\Controllers\CPInvestController'
 ];

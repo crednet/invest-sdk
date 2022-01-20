@@ -6,6 +6,7 @@ use Credpal\CPInvest\Facade\CpInvest;
 use Credpal\CPInvest\Http\Requests\CreateInvestmentRequest;
 use Credpal\CPInvest\Http\Requests\LiquidateInvestmentRequest;
 use Credpal\CPInvest\Http\Requests\WithdrawFundsRequest;
+use Credpal\CPInvest\Http\Requests\OtpRequest;
 use Illuminate\Http\Request;
 
 class CPInvestController extends Controller
@@ -52,6 +53,18 @@ class CPInvestController extends Controller
             'user_id' => auth()->user()->id,
             'investment_id' => $investmentId
         ]));
+    }
+
+    public function requestOtp(OtpRequest $request)
+    {
+        $user = auth()->user();
+
+        return $this->successResponse(CpInvest::requestOtp([
+            'user_id' => $user->id,
+            'recipient' => $user->phone_no,
+            'type' => $request->type,
+            'purpose' => $request->purpose,
+        ]), "OTP send successfully");
     }
 
     public function liquidateInvestment(LiquidateInvestmentRequest $request, string $investmentId)
