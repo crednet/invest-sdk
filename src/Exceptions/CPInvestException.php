@@ -3,7 +3,7 @@
 namespace Credpal\CPInvest\Exceptions;
 
 use Exception;
-use Illuminate\Http\Client\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
 
 class CPInvestException extends Exception
@@ -22,8 +22,12 @@ class CPInvestException extends Exception
             'message' => $this->getMessage()
         ];
         
-        if ($this->getCode() == \Symfony\Component\HttpFoundation\Response::HTTP_EXPECTATION_FAILED) {
+        if ($this->getCode() == Response::HTTP_EXPECTATION_FAILED) {
             $errorResponse['errors'] = self::getValidationErrors();
+        }
+
+        if ($this->getCode() >= Response::HTTP_INTERNAL_SERVER_ERROR) {
+            logger('invest - error', $this->getTrace());
         }
 
         return response()->json($errorResponse, $this->getCode());
