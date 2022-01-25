@@ -67,6 +67,7 @@ class CPInvestServiceProvider extends ServiceProvider
         return [
             'prefix' => config('cpinvest.prefix'),
             'middleware' => config('cpinvest.middleware'),
+            'namespace' => config('cpinvest.namespace'),
         ];
     }
 
