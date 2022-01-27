@@ -60,10 +60,10 @@ class CPInvestController extends Controller
         $user = auth()->user();
 
         return $this->successResponse(CpInvest::requestOtp([
-            'user_id' => $user->id,
-            'recipient' => $user->phone_no,
-            'type' => $request->type,
-            'purpose' => $request->purpose,
+            'user_id' => $user['id'],
+            'recipient' => $user['phone_no'],
+            'type' => $request['type'],
+            'purpose' => $request['purpose'],
         ]), "OTP send successfully");
     }
 
@@ -71,11 +71,11 @@ class CPInvestController extends Controller
     {
         $user = auth()->user();
         return $this->successResponse(CpInvest::liquidateInvestment([
-            'user_id' => $user->id,
-            'phone_no' => $user->phone_no,
+            'user_id' => $user['id'],
+            'phone_no' => $user['phone_no'],
             'investment_id' => $investmentId,
-            'otp' => $request->otp,
-            'wallet_id' => $request->wallet_id
+            'otp' => $request['otp'],
+            'wallet_id' => $request['wallet_id'],
         ]), "Investment Stopped");
     }
 
@@ -84,13 +84,13 @@ class CPInvestController extends Controller
         $user = auth()->user();
 
         return $this->successResponse(CpInvest::withdrawFunds([
-            'user_id' => $user->id,
+            'user_id' => $user['id'],
             'investment_id' => $investmentId,
-            'account_number' => $user->profile->account_no,
-            'bank_code' => $user->profile->bank_name,
-            'phone_no' => $user->phone_no,
-            'otp' => $request->otp,
-            'wallet_id' => $request->wallet_id
+            'account_number' => $user['profile']['account_no'],
+            'bank_code' => $user['profile']['bank_name'],
+            'phone_no' => $user['phone_no'],
+            'otp' => $request['otp'],
+            'wallet_id' => $request['wallet_id'],
         ]), "Withdrawal Request Sent");
     }
 
