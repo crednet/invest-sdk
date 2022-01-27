@@ -93,4 +93,14 @@ class CPInvestController extends Controller
             'wallet_id' => $request->wallet_id
         ]), "Withdrawal Request Sent");
     }
+
+    public function getInvestmentTypes()
+    {
+        return $this->successResponse(CpInvest::getInvestmentTypes());
+    }
+
+    public function getInvestmentTypeDetails($investmentTypeSlug)
+    {
+        return $this->successResponse(CpInvest::getInvestmentTypeDetails($investmentTypeSlug));
+    }
 }

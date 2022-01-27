@@ -90,4 +90,20 @@ class InvestService
             $data
         )->json()['data'];
     }
+
+    public static function getInvestmentTypes()
+    {
+        return self::makeRequest(
+            "investment-types",
+            "get"
+        )->json()['data'];
+    }
+
+    public static function getInvestmentTypeDetails($investmentTypeSlug)
+    {
+        return self::makeRequest(
+            "investment-types/{$investmentTypeSlug}",
+            "get"
+        )->json()['data'];
+    }
 }
