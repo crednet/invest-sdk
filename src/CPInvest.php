@@ -51,4 +51,14 @@ class CPInvest
     {
         return InvestService::requestOtp($data);
     }
+
+    public function getInvestmentTypes()
+    {
+        return InvestService::getInvestmentTypes();
+    }
+
+    public function getInvestmentTypeDetails($investmentTypeSlug)
+    {
+        return InvestService::getInvestmentTypeDetails($investmentTypeSlug);
+    }
 }

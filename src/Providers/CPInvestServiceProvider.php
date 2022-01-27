@@ -2,7 +2,6 @@
 
 namespace Credpal\CPInvest\Providers;
 
-use Credpal\CPInvest\Commands\SeedDataToTenureTable;
 use Credpal\CPInvest\CPInvest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -28,7 +27,6 @@ class CPInvestServiceProvider extends ServiceProvider
     {
         $this->registerRoutes()
             ->registerConfig()
-            ->registerCommands()
             ->registerMigrations();
     }
 
@@ -69,16 +67,5 @@ class CPInvestServiceProvider extends ServiceProvider
             'middleware' => config('cpinvest.middleware'),
             'namespace' => config('cpinvest.namespace'),
         ];
-    }
-
-    public function registerCommands(): CPInvestServiceProvider
-    {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                SeedDataToTenureTable::class,
-            ]);
-        }
-
-        return $this;
     }
 }

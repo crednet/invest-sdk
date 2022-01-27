@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('tenures', 'CPInvestController@getTenures');
 
+Route::get('investment-types', 'CPInvestController@getInvestmentTypes');
+Route::get('investment-types/{investmentTypeSlug}', 'CPInvestController@getInvestmentTypeDetails');
+
 Route::post('create', 'CPInvestController@create');
 
 Route::get('all', 'CPInvestController@getAllUserInvestments');
