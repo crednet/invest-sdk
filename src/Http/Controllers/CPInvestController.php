@@ -94,6 +94,14 @@ class CPInvestController extends Controller
         ]), "Withdrawal Request Sent");
     }
 
+    public function getInvestmentTypeDetails($investmentTypeSlug)
+    {
+        return $this->successResponse(CpInvest::getInvestmentTypeDetails($investmentTypeSlug));
+        return $this->successResponse(CpInvest::getSummary([
+            'user_id' => auth()->user()->id
+        ]));
+    }
+
     public function activeInvestmentSummary()
     {
         return $this->successResponse(CpInvest::getSummary([
