@@ -97,9 +97,6 @@ class CPInvestController extends Controller
     public function getInvestmentTypeDetails($investmentTypeSlug)
     {
         return $this->successResponse(CpInvest::getInvestmentTypeDetails($investmentTypeSlug));
-        return $this->successResponse(CpInvest::getSummary([
-            'user_id' => auth()->user()->id
-        ]));
     }
 
     public function activeInvestmentSummary()
