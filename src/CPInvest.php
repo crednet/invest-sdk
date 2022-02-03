@@ -61,4 +61,9 @@ class CPInvest
     {
         return InvestService::getInvestmentTypeDetails($investmentTypeSlug);
     }
+
+    public function getSummary($data)
+    {
+        return InvestService::getSummary($data);
+    }
 }

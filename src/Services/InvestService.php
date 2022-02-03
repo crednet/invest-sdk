@@ -106,4 +106,12 @@ class InvestService
             "get"
         )->json()['data'];
     }
+
+    public static function getSummary($data)
+    {
+        return self::makeRequest(
+            "investments/summary/user/{$data['user_id']}",
+            "get",
+        )->json()['data'];
+    }
 }
