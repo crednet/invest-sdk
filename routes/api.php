@@ -14,7 +14,7 @@ Route::get('all', 'CPInvestController@getAllUserInvestments');
 Route::get('active', 'CPInvestController@getUserActiveInvestments');
 
 Route::get('{investmentId}/details', 'CPInvestController@getInvestmentDetails');
-
+Route::get('active-investment-summary', 'CPInvestController@activeInvestmentSummary');
 Route::get(
     '{investmentId}/transactions',
     'CPInvestController@getInvestmentTransactions'
