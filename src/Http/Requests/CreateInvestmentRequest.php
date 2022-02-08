@@ -28,8 +28,9 @@ class CreateInvestmentRequest extends FormRequest
             'amount' => ['required', 'int', 'min:50000'],
             'name' => ['required', 'min:2',],
             'tenure_id' => ['required', 'string'],
-            'wallet_id' => ['required', Rule::exists(config('cpinvest.credpal_cash_table'))->where('user_id', auth()->user()->id)],
-            'investment_type_id' => ['required']
+            'wallet_id' => ['required', Rule::exists(config('cpinvest.credpal_cash_table'))
+                ->where('user_id', auth()->user()->id)],
+//            'investment_type_id' => ['required']
         ];
     }
 }
