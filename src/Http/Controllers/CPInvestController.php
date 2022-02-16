@@ -110,4 +110,12 @@ class CPInvestController extends Controller
             'user_id' => auth()->user()->id
         ]));
     }
+    
+    public function getRate(Request $request)
+    {
+        return $this->successResponse(CpInvest::getRate([
+            'tenure_id' => $request->tenure_id,
+            'amount' => $request->amount
+        ]));
+    }
 }

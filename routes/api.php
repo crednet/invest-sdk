@@ -6,6 +6,7 @@ Route::get('tenures', 'CPInvestController@getTenures');
 
 Route::get('investment-types', 'CPInvestController@getInvestmentTypes');
 Route::get('investment-types/{investmentTypeSlug}', 'CPInvestController@getInvestmentTypeDetails');
+Route::post('rate/percentage', 'CPInvestController@getRate');
 
 Route::post('create', 'CPInvestController@create');
 
