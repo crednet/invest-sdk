@@ -66,4 +66,9 @@ class CPInvest
     {
         return InvestService::getSummary($data);
     }
+
+    public function getRate($data)
+    {
+        return InvestService::getRate($data);
+    }
 }

@@ -114,4 +114,13 @@ class InvestService
             "get",
         )->json()['data'];
     }
+
+    public static function getRate($data)
+    {
+        return self::makeRequest(
+            "rates/percentage",
+            "post",
+            $data
+        )->json()['data'];
+    }
 }
