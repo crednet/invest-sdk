@@ -26,3 +26,17 @@ Route::post('otp', 'CPInvestController@requestOtp');
 Route::post('{investmentId}/liquidate', 'CPInvestController@liquidateInvestment');
 
 Route::post('{investmentId}/withdraw', 'CPInvestController@withdrawFunds');
+
+/** ========== Admin Expense Route ========= **/
+Route::group([
+    'namespace' => 'Admin',
+    'prefix' => 'admin',
+    'middleware' => ['auth:api']
+], function () {
+    Route::get('rates', 'CPInvestController@getRates');
+
+    Route::get('investments', 'CPInvestController@getAllInvestments');
+});
+
+
+Route::post('webhook', 'CPInvestController@webhook')->withoutMiddleware('auth:api');

@@ -2,11 +2,13 @@
 
 namespace Credpal\CPInvest\Http\Controllers;
 
+use App\Helpers\Datatable;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class Controller extends BaseController
@@ -32,5 +34,20 @@ class Controller extends BaseController
             "data" => $data,
             "message" => $message
         ], $statusCode);
+    }
+
+    public function datatable($query, array $config = [], $resourceClass = null)
+    {
+        $data = config('cpinvest.datatable_class')::make($query, $config, $resourceClass);
+
+        if ($data instanceof BinaryFileResponse) {
+            return $data;
+        }
+
+        return response()->json([
+            "success" => true,
+            "datatable" => $data,
+            "message" => 'Data Fetched Successfully'
+        ], Response::HTTP_OK);
     }
 }
