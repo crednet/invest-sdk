@@ -46,7 +46,7 @@ class CPInvestServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole() && !class_exists('CreateCpInvestTenuresTable')) {
             $this->publishes([
                 __DIR__ . '/../../database/migrations/create_cp_invest_investments_table.stub' =>
-                    database_path('migrations/' . date('Y_m_d_His') . '_create_cp_investment_table.php'),
+                    database_path('migrations/' . date('Y_m_d_His') . '_create_cp_investments_table.php'),
             ], 'migrations');
         }
 

@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Traits\WithMigrationIndex;
 
-class CreateInvestmentsTable extends Migration
+class CreateCpInvestmentsTable extends Migration
 {
     use WithMigrationIndex;
 
