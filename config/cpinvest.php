@@ -7,4 +7,6 @@ return [
     'prefix' => 'api/invest',
     'middleware' => ['api', 'auth:api'],
     'namespace' => 'Credpal\CPInvest\Http\Controllers',
+    'datatable_class' => 'App\Helpers\Datatable',
+    'user_class' => 'App\User',
 ];

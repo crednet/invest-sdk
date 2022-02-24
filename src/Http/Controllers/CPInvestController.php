@@ -2,12 +2,14 @@
 
 namespace Credpal\CPInvest\Http\Controllers;
 
+use Credpal\CPInvest\Models\Investment;
 use Credpal\CPInvest\Facade\CpInvest;
 use Credpal\CPInvest\Http\Requests\CreateInvestmentRequest;
 use Credpal\CPInvest\Http\Requests\LiquidateInvestmentRequest;
 use Credpal\CPInvest\Http\Requests\WithdrawFundsRequest;
 use Credpal\CPInvest\Http\Requests\OtpRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CPInvestController extends Controller
 {
@@ -110,12 +112,43 @@ class CPInvestController extends Controller
             'user_id' => auth()->user()->id
         ]));
     }
-    
+
     public function getRate(Request $request)
     {
         return $this->successResponse(CpInvest::getRate([
             'tenure_id' => $request->tenure_id,
             'amount' => $request->amount
         ]));
+    }
+
+    public function webhook(Request $request)
+    {
+        // TODO: validate this request is coming from the expected source since authentication middle would be disable
+
+        foreach ($request->input() as $investment)
+        {
+            Investment::updateOrCreate([
+                'invest_investment_id' => $investment['id']
+            ], [
+                'user_id' => $investment['user_id'],
+                'name' => $investment['name'],
+                'investment_type' => $investment['investment_type']['name'],
+                'amount' => $investment['amount'],
+                'liquidateable' => $investment['liquidateable'],
+                'earnings' => $investment['earnings'],
+                'days' => $investment['days'],
+                'tax' => $investment['tax'],
+                'percentage' => $investment['percentage'],
+                'closing_at' => $investment['closing_at'],
+                'liquidated_at' => $investment['liquidated_at'],
+                'withdrew_at' => $investment['withdrew_at'],
+                'active_at' => $investment['active_at'],
+                'withdrawal_requested_at' => $investment['withdrawal_requested_at'],
+                'status' => $investment['status'],
+            ]);
+        }
+        Log::debug("webhook controller called");
+        
+        exit(200);
     }
 }

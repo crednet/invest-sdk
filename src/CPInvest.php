@@ -71,4 +71,9 @@ class CPInvest
     {
         return InvestService::getRate($data);
     }
+
+    public function getTransformRates()
+    {
+        return InvestService::getTransformRates();
+    }
 }

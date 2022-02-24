@@ -2,6 +2,7 @@
 
 namespace Credpal\CPInvest\Services;
 
+use Credpal\CPInvest\Models\Investment;
 use Credpal\CPInvest\Exceptions\CPInvestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +38,10 @@ class InvestService
 
     public static function createInvestment($data)
     {
-        return self::makeRequest("investments", "post", $data)->json()['data'];
+        $createInvest = self::makeRequest("investments", "post", $data)->json()['data'];
+
+        Investment::logInvestmentDetails($createInvest['investment']);
+        return $createInvest;
     }
 
     public static function getAllUserInvestments($data)
@@ -121,6 +125,14 @@ class InvestService
             "rates/percentage",
             "post",
             $data
+        )->json()['data'];
+    }
+
+    public static function getTransformRates()
+    {
+        return self::makeRequest(
+            "rates/formatted-rate",
+            "get",
         )->json()['data'];
     }
 }
