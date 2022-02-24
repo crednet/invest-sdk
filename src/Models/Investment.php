@@ -16,6 +16,8 @@ class Investment extends Model
     public const STATUS_WITHDRAWAL_REQUESTED = 'withdraw requested';
     public const STATUS_WITHDRAWN = 'withdrawn';
 
+    protected $table = 'investments';
+
     protected $guarded = [];
 
     protected $casts = [
