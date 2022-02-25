@@ -148,7 +148,14 @@ class CPInvestController extends Controller
             ]);
         }
         Log::debug("webhook controller called");
-        
+
         exit(200);
+    }
+
+    public function getInvestmentHistory()
+    {
+        return $this->successResponse(CpInvest::getInvestmentHistory([
+            'user_id' => auth()->user()->id
+        ]));
     }
 }
