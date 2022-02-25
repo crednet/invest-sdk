@@ -135,4 +135,13 @@ class InvestService
             "get",
         )->json()['data'];
     }
+
+    public static function getInvestmentHistory($data)
+    {
+        return self::makeRequest(
+            "investments/history",
+            "get",
+            $data
+        )->json()['data'];
+    }
 }

@@ -76,4 +76,9 @@ class CPInvest
     {
         return InvestService::getTransformRates();
     }
+
+    public function getInvestmentHistory($data)
+    {
+        return InvestService::getInvestmentHistory($data);
+    }
 }
