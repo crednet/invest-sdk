@@ -75,6 +75,10 @@ class CPInvestController extends Controller
         return $this->successResponse(CpInvest::liquidateInvestment([
             'user_id' => $user['id'],
             'phone_no' => $user['phone_no'],
+            'user' => [
+                'name' => $user->name,
+                'email' => $user->email,
+            ],
             'investment_id' => $investmentId,
             'otp' => $request['otp'],
             'wallet_id' => $request['wallet_id'],
@@ -88,6 +92,10 @@ class CPInvestController extends Controller
         return $this->successResponse(CpInvest::withdrawFunds([
             'user_id' => $user['id'],
             'investment_id' => $investmentId,
+            'user' => [
+                'name' => $user['name'],
+                'email' => $user['email'],
+            ],
             'account_number' => $user['profile']['account_no'],
             'bank_code' => $user['profile']['bank_name'],
             'phone_no' => $user['phone_no'],
