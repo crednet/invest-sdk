@@ -25,7 +25,7 @@ class CreateInvestmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount' => ['required', 'int', 'min:50000'],
+            'amount' => ['required', 'int'],
             'name' => ['required', 'min:2',],
             'tenure_id' => ['required', 'string'],
             'wallet_id' => ['required', Rule::exists(config('cpinvest.credpal_cash_table'))
