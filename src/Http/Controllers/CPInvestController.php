@@ -20,9 +20,15 @@ class CPInvestController extends Controller
 
     public function create(CreateInvestmentRequest $request)
     {
-        $data = array_merge($request->validated(), [
-            'user_id' => auth()->user()->id,
-        ]);
+		$user = auth()->user();
+
+		$data = array_merge($request->validated(), [
+			'user_id' => $user['id'],
+			'user' => [
+				'name' => $user['name'],
+				'email' => $user['email'],
+			],
+		]);
 
         return $this->successResponse(CpInvest::create($data));
     }
