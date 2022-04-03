@@ -143,12 +143,22 @@ class InvestService
 		)->json();
 	}
 
+	public static function updateAdminRates()
+	{
+		return true;
+	}
+
 	public static function getAdminTenure()
 	{
 		return self::makeRequest(
 			"admin/tenure",
 			"get",
 		)->json();
+	}
+
+	public static function updateAdminTenure()
+	{
+		return true;
 	}
 
 	public static function getAdminConfiguration()

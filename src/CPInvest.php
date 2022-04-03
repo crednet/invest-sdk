@@ -82,9 +82,19 @@ class CPInvest
 		return InvestService::getAdminRates();
 	}
 
+	public static function updateAdminRates()
+	{
+		return InvestService::updateAdminRates();
+	}
+
 	public static function getAdminTenure()
 	{
 		return InvestService::getAdminTenure();
+	}
+
+	public static function updateAdminTenure()
+	{
+		return InvestService::updateAdminTenure();
 	}
 
 	public static function getAdminConfiguration()
