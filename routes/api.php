@@ -33,7 +33,14 @@ Route::group([
     'prefix' => 'admin',
     'middleware' => ['auth:api']
 ], function () {
-    Route::get('rates', 'CPInvestController@getRates');
+	Route::get('rates', 'CPInvestController@getAdminRates');
+	Route::get('rates/update', 'CPInvestController@updateAdminRates');
+
+	Route::get('tenure', 'CPInvestController@getAdminTenure');
+	Route::get('tenure/update', 'CPInvestController@updateAdminTenure');
+
+	Route::get('configuration', 'CPInvestController@getAdminConfiguration');
+	Route::post('configuration/update', 'CPInvestController@updateAdminConfiguration');
 
     Route::get('investments', 'CPInvestController@getAllInvestments');
 });

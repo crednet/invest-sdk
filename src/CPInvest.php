@@ -77,6 +77,26 @@ class CPInvest
         return InvestService::getTransformRates();
     }
 
+	public static function getAdminRates()
+	{
+		return InvestService::getAdminRates();
+	}
+
+	public static function getAdminTenure()
+	{
+		return InvestService::getAdminTenure();
+	}
+
+	public static function getAdminConfiguration()
+	{
+		return InvestService::getAdminConfiguration();
+	}
+
+	public static function updateAdminConfiguration($key, $data)
+	{
+		return InvestService::updateAdminConfiguration($key, $data);
+	}
+
     public function getInvestmentHistory($data)
     {
         return InvestService::getInvestmentHistory($data);
