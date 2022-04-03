@@ -2,6 +2,7 @@
 
 namespace Credpal\CPInvest\Http\Controllers\Admin;
 
+use Credpal\CPInvest\Http\Requests\UpdateConfigurationRequest;
 use Credpal\CPInvest\Models\Investment;
 use Credpal\CPInvest\Facade\CpInvest;
 use Credpal\CPInvest\Http\Controllers\Controller;
@@ -35,12 +36,12 @@ class CpInvestController extends Controller
 		return CpInvest::getAdminConfiguration();
 	}
 
-	public function updateAdminConfiguration(Request $request)
+	public function updateAdminConfiguration(UpdateConfigurationRequest $request)
 	{
-		$key = $request->key;
-		$value = $request->value;
-		$data = ['value' => $value];
-		return CpInvest::updateAdminConfiguration($key, $data);
+		return CpInvest::updateAdminConfiguration(
+			$request->input('key'),
+			['value' => $request->input('value')]
+		);
 	}
 
 	public function getAllInvestments(Request $request)
