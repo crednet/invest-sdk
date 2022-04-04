@@ -32,7 +32,6 @@ class InvestService
 
 	public static function getInvestmentTenures()
 	{
-
 		return self::makeRequest('tenures/list', 'get')->json();
 	}
 
@@ -134,6 +133,49 @@ class InvestService
 			"rates/formatted-rate",
 			"get",
 		)->json()['data'];
+	}
+
+	public static function getAdminRates()
+	{
+		return self::makeRequest(
+			"admin/rates",
+			"get",
+		)->json();
+	}
+
+	public static function updateAdminRates()
+	{
+		return true;
+	}
+
+	public static function getAdminTenure()
+	{
+		return self::makeRequest(
+			"admin/tenure",
+			"get",
+		)->json();
+	}
+
+	public static function updateAdminTenure()
+	{
+		return true;
+	}
+
+	public static function getAdminConfiguration()
+	{
+		return self::makeRequest(
+			"admin/configuration",
+			"get",
+		)->json();
+	}
+
+	public static function updateAdminConfiguration($key, $data)
+	{
+		return self::makeRequest(
+			"admin/configuration/{$key}/update",
+			"patch",
+			$data
+		)->json();
 	}
 
 	public static function getInvestmentHistory($data)

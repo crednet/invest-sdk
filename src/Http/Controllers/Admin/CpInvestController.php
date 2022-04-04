@@ -2,6 +2,7 @@
 
 namespace Credpal\CPInvest\Http\Controllers\Admin;
 
+use Credpal\CPInvest\Http\Requests\UpdateConfigurationRequest;
 use Credpal\CPInvest\Models\Investment;
 use Credpal\CPInvest\Facade\CpInvest;
 use Credpal\CPInvest\Http\Controllers\Controller;
@@ -10,51 +11,72 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CpInvestController extends Controller
 {
-    public function getRates ()
-    {
-        $investments = CpInvest::getTransformRates();
-        $investments = collect($investments['rates']);
+	public function getAdminRates()
+	{
+		return CpInvest::getAdminRates();
+	}
 
-        return response()->json([
-            "success" => true,
-            "datatable" => ['data' => $investments],
-            "message" => 'Data Fetched Successfully'
-        ], Response::HTTP_OK);
-    }
+	public function updateAdminRates()
+	{
+		return CpInvest::updateAdminRates();
+	}
 
-    public function getAllInvestments(Request $request)
-    {
-        $searchString = $request->search;
+	public function getAdminTenure()
+	{
+		return CpInvest::getAdminTenure();
+	}
 
-        $investments = Investment::with('user');
+	public function updateAdminTenure()
+	{
+		return CpInvest::updateAdminTenure();
+	}
 
-        if ($searchString) {
-            $investments = $investments->where(function($investment) use ($searchString) {
-                $investment->where('name', 'like', "%{$searchString}%")
-                    ->orWhere('invest_investment_id', 'like', "%{$searchString}%")
-                    ->orWhereHas('user', function ($query) use ($searchString) {
-                        $query->whereRaw("CONCAT(users.name, ' ', users.last_name) like '%{$searchString}%'");
-                    });
-            });
-        }
+	public function getAdminConfiguration()
+	{
+		return CpInvest::getAdminConfiguration();
+	}
 
-        return $this->datatable($investments, [
-            'filters' => $this->getInvestFiltersArray()
-        ]);
-    }
+	public function updateAdminConfiguration(UpdateConfigurationRequest $request)
+	{
+		return CpInvest::updateAdminConfiguration(
+			$request->input('key'),
+			['value' => $request->input('value')]
+		);
+	}
 
-    private function getInvestFiltersArray()
-    {
-        return [
-            'running' => function($investment) {
-                $investment->where('status', Investment::STATUS_RUNNING);
-            },
-            'liquidated' => function($investment) {
-                $investment->where('status', Investment::STATUS_LIQUIDATED);
-            },
-            'withdrawn' => function($investment) {
-                $investment->where('status', Investment::STATUS_WITHDRAWN);
-            },
-        ];
-    }
+	public function getAllInvestments(Request $request)
+	{
+		$searchString = $request->search;
+
+		$investments = Investment::with('user');
+
+		if ($searchString) {
+			$investments = $investments->where(function($investment) use ($searchString) {
+				$investment->where('name', 'like', "%{$searchString}%")
+					->orWhere('invest_investment_id', 'like', "%{$searchString}%")
+					->orWhereHas('user', function ($query) use ($searchString) {
+						$query->whereRaw("CONCAT(users.name, ' ', users.last_name) like '%{$searchString}%'");
+					});
+			});
+		}
+
+		return $this->datatable($investments, [
+			'filters' => $this->getInvestFiltersArray()
+		]);
+	}
+
+	private function getInvestFiltersArray()
+	{
+		return [
+			'running' => function($investment) {
+				$investment->where('status', Investment::STATUS_RUNNING);
+			},
+			'liquidated' => function($investment) {
+				$investment->where('status', Investment::STATUS_LIQUIDATED);
+			},
+			'withdrawn' => function($investment) {
+				$investment->where('status', Investment::STATUS_WITHDRAWN);
+			},
+		];
+	}
 }
