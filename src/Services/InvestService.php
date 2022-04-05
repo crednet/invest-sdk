@@ -186,4 +186,12 @@ class InvestService
 			$data
 		)->json();
 	}
+
+	public static function getAllInvestments()
+	{
+		return self::makeRequest(
+			"admin/investments",
+			"get"
+		)->json();
+	}
 }

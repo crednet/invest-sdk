@@ -111,4 +111,9 @@ class CPInvest
     {
         return InvestService::getInvestmentHistory($data);
     }
+
+	public static function getAllInvestments()
+	{
+		return InvestService::getAllInvestments();
+	}
 }
