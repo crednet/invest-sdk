@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Facade;
  */
 class CpInvest extends Facade
 {
-	/**
-	 * @return string
-	 */
-	protected static function getFacadeAccessor(): string
-	{
-		return 'cpinvest';
-	}
+    /**
+     * @return string
+     */
+    protected static function getFacadeAccessor(): string
+    {
+        return 'cpinvest';
+    }
 }
