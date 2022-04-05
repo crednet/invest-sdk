@@ -39,14 +39,14 @@ Route::group([
 	Route::get('tenure', 'CPInvestController@getAdminTenure');
 	Route::get('tenure/update', 'CPInvestController@updateAdminTenure');
 
-	Route::group(['prefix' => 'configuration', 'middleware' => ['permission:credpal:can_view_invest_configurations']], function () {
-		Route::get('', 'CPInvestController@getAdminConfiguration');
-		Route::post('update', 'CPInvestController@updateAdminConfiguration');
-	});
+//	Route::group(['prefix' => 'configuration', 'middleware' => ['permission:credpal:can_view_invest_configurations']], function () {
+//		Route::get('', 'CPInvestController@getAdminConfiguration');
+//		Route::post('update', 'CPInvestController@updateAdminConfiguration');
+//	});
 
-	Route::group(['prefix' => 'investments', 'middleware' => ['permission:credpal:can_view_invest']], function () {
-		Route::get('', 'CPInvestController@getAllInvestments');
-	});
+//	Route::group(['prefix' => 'investments', 'middleware' => ['permission:credpal:can_view_invest']], function () {
+//		Route::get('', 'CPInvestController@getAllInvestments');
+//	});
 });
 
 Route::post('webhook', 'CPInvestController@webhook')->withoutMiddleware('auth:api');
