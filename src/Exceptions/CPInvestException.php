@@ -21,14 +21,16 @@ class CPInvestException extends Exception
             'success' => false,
             'message' => $this->getMessage()
         ];
-        
+
         if ($this->getCode() == Response::HTTP_EXPECTATION_FAILED) {
             $errorResponse['errors'] = self::getValidationErrors();
         }
 
-        if ($this->getCode() >= Response::HTTP_INTERNAL_SERVER_ERROR) {
-            logger('invest - error', $this->getTrace());
-        }
+		if ($this->getCode() >= Response::HTTP_INTERNAL_SERVER_ERROR) {
+			logger(
+				'Invest Error: ' . $this->getMessage() . ' ' .$this->getFile()
+				. ' ' . $this->getLine());
+		}
 
         return response()->json($errorResponse, $this->getCode());
     }

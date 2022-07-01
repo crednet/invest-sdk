@@ -12,10 +12,9 @@ class InvestService
 	public static function makeRequest(string $url, string $method = "post", array $data = [])
 	{
 		try {
-			$response = Http::withHeaders([
-				'Accept' => 'application/json',
-				'client-key' => config('cpinvest.client_key')
-			])->$method(config('cpinvest.base_url') . $url, $data);
+			$response = Http::acceptJson()
+				->withHeaders(['client-key' => config('cpinvest.client_key')])
+				->$method(config('cpinvest.base_url') . $url, $data);
 
 			if (!$response->successful()) {
 				if ($response->status() == Response::HTTP_EXPECTATION_FAILED && isset($response->json()['errors'])) {
@@ -45,12 +44,12 @@ class InvestService
 
 	public static function getAllUserInvestments($data)
 	{
-		return self::makeRequest("investments", "get", $data)->json();
+		return self::makeRequest("investments/{$data['user_id']}", "get")->json();
 	}
 
 	public static function getUserActiveInvestments($data)
 	{
-		return self::makeRequest("investments/active", "get", $data)->json();
+		return self::makeRequest("investments/active/{$data['user_id']}", "get")->json();
 	}
 
 	public static function getInvestmentDetails($data)
@@ -180,11 +179,8 @@ class InvestService
 
 	public static function getInvestmentHistory($data)
 	{
-		return self::makeRequest(
-			"investments/history",
-			"get",
-			$data
-		)->json();
+		return self::makeRequest("investments/history/{$data['user_id']}", "get")
+			->json();
 	}
 
 	public static function getAllInvestments()
